@@ -1,0 +1,61 @@
+#!/usr/bin/bash
+: '
+Created by  : Abunachar
+lang        : bash
+Created On  : 31/12/20
+version     : v1.0
+Description : Script to Download Arch User repository packages 
+'
+# change directory to home directory
+cd ~
+
+#locate the downloads folder and change directory
+if [ -d "Downloads" ]; then 
+    cd Downloads
+elif [ -d 'downloads' ];then
+    cd downloads
+else
+    echo "Downloads Directory not found"
+fi
+
+#link from command line argument
+link=$1
+
+#check if link exist 
+if [[ ${#link} -gt 0 ]]; then
+    echo "getting package..."
+
+    # checking if the the link of the package exist 
+    gitCheck=$(git ls-remote https://aur.archlinux.org/$link.git)
+    if [[ ${#gitCheck} -gt 0 ]]; then
+         git clone https://aur.archlinux.org/$link.git
+
+         # check if successfully cloned the repository
+         if [[ $? -eq 0 ]];then
+            #change directory and makepkg the aur package
+            cd $link
+            makepkg -si
+
+            #after successfully installing removing the clone package directory
+            if [[ $? -eq 0 ]];then
+                echo "Do you Want to remove this cloned directory?"
+                read yn
+                if [[ $yn == 'y' || $yn == 'Y' ]];then
+                    cd ..
+                    rm -r $link/*
+                    rmdir $link
+                fi
+
+            fi
+        else
+            echo "Fail to clone AUR package"
+        fi
+    else
+        echo "No Such package $link found in AUR, Please enter a valid Package Name"
+        exit 1
+    fi
+else 
+    echo "invalid command"
+    echo "type :- aur <package name>"
+    exit 1
+fi
