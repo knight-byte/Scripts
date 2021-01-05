@@ -13,11 +13,20 @@ Star 🌟 the repository if you like it and Fork the repository for Contribution
 
 These Repository Contain script created by me to automate few of my Daily task
 
+### Scripts list
+
+|                              Script name                              | Description                                                                            |
+| :-------------------------------------------------------------------: | -------------------------------------------------------------------------------------- |
+|      [Aur](https://github.com/knight-byte/Scripts/tree/main/Aur)      | Arch user repository package downloader and installer                                  |
+| [Sortthis](https://github.com/knight-byte/Scripts/tree/main/Sortthis) | Sorts all the file in an directory (folder not included) as per the file type/category |
+
+<h4 style="color:lightblue">+ more Scripts to come</h4>.
+
 ### Clone the repository
 
 ```
-git clone https://github.com/knight-byte/script.git
-cd script
+git clone https://github.com/knight-byte/Scripts.git
+cd Scripts
 ```
 
 ### Usage
